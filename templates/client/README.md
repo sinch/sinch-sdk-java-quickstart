@@ -10,7 +10,7 @@ This directory contains a client application based onto [Sinch SDK java](https:/
 
 ## Configuration
 
-Edit [config.properties](src/main/resources/config.properties) file to set credentials to be used by client.
+Edit [config.properties](src/main/resources/config.properties) file to set credentials to be used to configure the SinchClient.
 
 You need to fill the following settings with your Sinch account information:
 - `SINCH_PROJECT_ID`=Your Sinch Project ID
