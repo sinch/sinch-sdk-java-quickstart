@@ -54,11 +54,14 @@ public class SinchClientHelper {
 
   static void manageUnifiedCredentials(Properties properties, Configuration.Builder builder) {
 
+    String projectId = getConfigValue(properties, SINCH_PROJECT_ID_KEY);
     String keyId = getConfigValue(properties, SINCH_KEY_ID_KEY);
     String keySecret = getConfigValue(properties, SINCH_KEY_SECRET_KEY);
-    String projectId = getConfigValue(properties, SINCH_PROJECT_ID_KEY);
 
-    builder.setKeyId(keyId).setKeySecret(keySecret).setProjectId(projectId);
+    builder
+        .setProjectId(projectId)
+        .setKeyId(keyId)
+        .setKeySecret(keySecret);
   }
 
   static String getConfigValue(Properties properties, String key) {
