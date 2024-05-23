@@ -14,7 +14,7 @@ public abstract class Application {
     try {
 
       SinchClient client = SinchClientHelper.initSinchClient();
-      LOGGER.info("Application inited. SinchClient ready.");
+      LOGGER.info("Application initiated. SinchClient ready.");
 
     } catch (Exception e) {
       LOGGER.severe(e.getMessage());
