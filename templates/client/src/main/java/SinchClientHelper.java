@@ -10,9 +10,9 @@ public class SinchClientHelper {
 
     private static final Logger LOGGER = Logger.getLogger(SinchClientHelper.class.getName());
 
+    private static final String SINCH_PROJECT_ID_KEY = "SINCH_PROJECT_ID";
     private static final String SINCH_KEY_ID_KEY = "SINCH_KEY_ID";
     private static final String SINCH_KEY_SECRET_KEY = "SINCH_KEY_SECRET";
-    private static final String SINCH_PROJECT_ID_KEY = "SINCH_PROJECT_ID";
 
     private static final String APPLICATION_API_KEY = "APPLICATION_API_KEY";
     private static final String APPLICATION_API_SECRET = "APPLICATION_API_SECRET";
@@ -30,7 +30,7 @@ public class SinchClientHelper {
         return new SinchClient(configuration);
     }
 
-    static Configuration getConfiguration() {
+    private static Configuration getConfiguration() {
 
         Properties properties = loadProperties();
 
@@ -43,7 +43,7 @@ public class SinchClientHelper {
         return builder.build();
     }
 
-    static Properties loadProperties() {
+    private static Properties loadProperties() {
 
         Properties properties = new Properties();
 
@@ -92,7 +92,7 @@ public class SinchClientHelper {
         servicePlanToken.ifPresent(builder::setSmsApiToken);
     }
 
-    static Optional<String> getConfigValue(Properties properties, String key) {
+    private static Optional<String> getConfigValue(Properties properties, String key) {
         String value =
                 null != System.getenv(key) ? System.getenv(key) : properties.getProperty(key);
 
