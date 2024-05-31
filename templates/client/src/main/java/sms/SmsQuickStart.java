@@ -1,12 +1,15 @@
 package sms;
 
-import com.sinch.sdk.domains.sms.SMSService;
+import com.sinch.sdk.domains.sms.*;
 
 public class SmsQuickStart {
 
-    private final SMSService service;
+    private final SMSService smsService;
 
-    public SmsQuickStart(SMSService service) {
-        this.service = service;
+    public SmsQuickStart(SMSService smsService) {
+        this.smsService = smsService;
+
+        // replace by your code and business logic
+        Snippet.execute(this.smsService);
     }
 }
