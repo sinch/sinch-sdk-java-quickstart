@@ -4,9 +4,12 @@ import com.sinch.sdk.domains.voice.VoiceService;
 
 public class VoiceQuickStart {
 
-    private final VoiceService service;
+    private final VoiceService voiceService;
 
-    public VoiceQuickStart(VoiceService service) {
-        this.service = service;
+    public VoiceQuickStart(VoiceService voiceService) {
+        this.voiceService = voiceService;
+
+        // replace by your code and business logic
+        Snippet.execute(this.voiceService);
     }
 }
