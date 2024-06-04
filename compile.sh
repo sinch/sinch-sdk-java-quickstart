@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mvn clean spotless:apply
+mvn -f pom-ci.xml clean spotless:apply
 
 (cd templates/client && mvn clean package)
 
