@@ -17,7 +17,7 @@ public class AutoSubscribeService {
     private static final Logger LOGGER = Logger.getLogger(AutoSubscribeService.class.getName());
 
     static final String SUBSCRIBE_ACTION = "SUBSCRIBE";
-    static final String STOP_ACTION = "ACTION";
+    static final String STOP_ACTION = "STOP";
 
     private final SMSService smsService;
     private final Group group;
