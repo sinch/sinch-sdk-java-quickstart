@@ -35,8 +35,7 @@ public abstract class Application {
             }
 
             // Verification service dedicated business logic processing
-            // (see
-            // https://developers.sinch.com/docs/verification)
+            // (see https://developers.sinch.com/docs/verification)
             // comment if unused
             if (client.getConfiguration().getApplicationCredentials().isPresent()) {
                 VerificationQuickStart verification =
@@ -44,8 +43,7 @@ public abstract class Application {
             }
 
             // Voice service dedicated business logic processing
-            // (see
-            // https://developers.sinch.com/docs/voice)
+            // (see https://developers.sinch.com/docs/voice)
             // comment if unused
             if (client.getConfiguration().getApplicationCredentials().isPresent()) {
                 VoiceQuickStart voice = new VoiceQuickStart(client.voice());
