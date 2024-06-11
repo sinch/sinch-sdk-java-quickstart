@@ -1,5 +1,6 @@
 import com.sinch.sdk.SinchClient;
 import com.sinch.sdk.models.Configuration;
+import com.sinch.sdk.models.SMSRegion;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -35,6 +36,8 @@ public class SinchClientHelper {
         Properties properties = loadProperties();
 
         Configuration.Builder builder = Configuration.builder();
+
+        builder.setSmsRegion(SMSRegion.US);
 
         manageUnifiedCredentials(properties, builder);
         manageApplicationCredentials(properties, builder);
