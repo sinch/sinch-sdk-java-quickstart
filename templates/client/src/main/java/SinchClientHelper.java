@@ -1,5 +1,6 @@
 import com.sinch.sdk.SinchClient;
 import com.sinch.sdk.models.Configuration;
+import com.sinch.sdk.models.SMSRegion;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -10,15 +11,17 @@ public class SinchClientHelper {
 
     private static final Logger LOGGER = Logger.getLogger(SinchClientHelper.class.getName());
 
-    private static final String SINCH_PROJECT_ID_KEY = "SINCH_PROJECT_ID";
-    private static final String SINCH_KEY_ID_KEY = "SINCH_KEY_ID";
-    private static final String SINCH_KEY_SECRET_KEY = "SINCH_KEY_SECRET";
+    private static final String SINCH_PROJECT_ID = "SINCH_PROJECT_ID";
+    private static final String SINCH_KEY_ID = "SINCH_KEY_ID";
+    private static final String SINCH_KEY_SECRET = "SINCH_KEY_SECRET";
 
     private static final String APPLICATION_API_KEY = "APPLICATION_API_KEY";
     private static final String APPLICATION_API_SECRET = "APPLICATION_API_SECRET";
 
     private static final String SMS_SERVICE_PLAN_ID = "SMS_SERVICE_PLAN_ID";
     private static final String SMS_SERVICE_PLAN_TOKEN = "SMS_SERVICE_PLAN_TOKEN";
+    private static final String SMS_REGION = "SMS_REGION";
+
     private static final String CONFIG_FILE = "config.properties";
 
     public static SinchClient initSinchClient() {
@@ -38,7 +41,7 @@ public class SinchClientHelper {
 
         manageUnifiedCredentials(properties, builder);
         manageApplicationCredentials(properties, builder);
-        manageSmsServicePlanCredentials(properties, builder);
+        manageSmsConfiguration(properties, builder);
 
         return builder.build();
     }
@@ -63,9 +66,9 @@ public class SinchClientHelper {
 
     static void manageUnifiedCredentials(Properties properties, Configuration.Builder builder) {
 
-        Optional<String> projectId = getConfigValue(properties, SINCH_PROJECT_ID_KEY);
-        Optional<String> keyId = getConfigValue(properties, SINCH_KEY_ID_KEY);
-        Optional<String> keySecret = getConfigValue(properties, SINCH_KEY_SECRET_KEY);
+        Optional<String> projectId = getConfigValue(properties, SINCH_PROJECT_ID);
+        Optional<String> keyId = getConfigValue(properties, SINCH_KEY_ID);
+        Optional<String> keySecret = getConfigValue(properties, SINCH_KEY_SECRET);
 
         projectId.ifPresent(builder::setProjectId);
         keyId.ifPresent(builder::setKeyId);
@@ -82,14 +85,16 @@ public class SinchClientHelper {
         verificationApiSecret.ifPresent(builder::setApplicationSecret);
     }
 
-    private static void manageSmsServicePlanCredentials(
+    private static void manageSmsConfiguration(
             Properties properties, Configuration.Builder builder) {
 
         Optional<String> servicePlanId = getConfigValue(properties, SMS_SERVICE_PLAN_ID);
         Optional<String> servicePlanToken = getConfigValue(properties, SMS_SERVICE_PLAN_TOKEN);
+        Optional<String> region = getConfigValue(properties, SMS_REGION);
 
         servicePlanId.ifPresent(builder::setSmsServicePlanId);
         servicePlanToken.ifPresent(builder::setSmsApiToken);
+        region.ifPresent(value -> builder.setSmsRegion(SMSRegion.from(value)));
     }
 
     private static Optional<String> getConfigValue(Properties properties, String key) {
