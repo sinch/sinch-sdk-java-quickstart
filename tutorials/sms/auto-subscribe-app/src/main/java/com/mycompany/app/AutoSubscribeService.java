@@ -39,14 +39,7 @@ public class AutoSubscribeService {
         var membersList = getMembersList(group);
         var isMemberInGroup = isMemberInGroup(membersList, from);
 
-        String response =
-                switch (action) {
-                    case SUBSCRIBE_ACTION -> subscribe(group, isMemberInGroup, to, from);
-                    case STOP_ACTION -> unsubscribe(group, isMemberInGroup, to, from);
-                    default ->
-                            "Thanks for your interest. If you want to subscribe to this group, text \"SUBSCRIBE\"  to +%s"
-                                    .formatted(to);
-                };
+        String response = processAction(from, to, action, membersList, isMemberInGroup);
 
         sendResponse(to, from, response);
     }
@@ -59,12 +52,28 @@ public class AutoSubscribeService {
         return membersList.contains(member);
     }
 
+    private String processAction(
+            String from,
+            String to,
+            String action,
+            Collection<String> membersList,
+            boolean isMemberInGroup) {
+
+        if (SUBSCRIBE_ACTION.equals(action)) {
+            return subscribe(group, isMemberInGroup, to, from);
+        } else if (STOP_ACTION.equals(action)) {
+            return unsubscribe(group, isMemberInGroup, to, from);
+        }
+
+        return unknwownAction(isMemberInGroup, to);
+    }
+
     private String subscribe(
             Group group, boolean isMemberInGroup, String groupPhoneNumber, String member) {
 
         if (isMemberInGroup) {
-            return "You already subscribed to '%s'. Text \"STOP\" to +%s to leave this group."
-                    .formatted(group.getName(), groupPhoneNumber);
+            return "You already subscribed to '%s'. Text \"%s\" to +%s to leave this group."
+                    .formatted(group.getName(), STOP_ACTION, groupPhoneNumber);
         }
 
         var request =
@@ -73,16 +82,16 @@ public class AutoSubscribeService {
                         .build();
 
         smsService.groups().update(group.getId(), request);
-        return "Congratulations! You are now subscribed to '%s'. Text \"STOP\" to +%s to leave this group."
-                .formatted(group.getName(), groupPhoneNumber);
+        return "Congratulations! You are now subscribed to '%s'. Text \"%s\" to +%s to leave this group."
+                .formatted(group.getName(), STOP_ACTION, groupPhoneNumber);
     }
 
     private String unsubscribe(
             Group group, boolean isMemberInGroup, String groupPhoneNumber, String member) {
 
         if (!isMemberInGroup) {
-            return "You did not subscribed to '%s'. Text \"SUBSCRIBE\" to +%s to join this group."
-                    .formatted(group.getName(), groupPhoneNumber);
+            return "You did not subscribed to '%s'. Text \"%s\" to +%s to join this group."
+                    .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
         }
 
         var request =
@@ -91,8 +100,21 @@ public class AutoSubscribeService {
                         .build();
 
         smsService.groups().update(group.getId(), request);
-        return "We're sorry to see you go. You can always rejoin '%s' by texting \"SUBSCRIBE\" to +%s."
-                .formatted(group.getName(), groupPhoneNumber);
+        return "We're sorry to see you go. You can always rejoin '%s' by texting \"%s\" to +%s."
+                .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
+    }
+
+    private String unknwownAction(boolean isMemberInGroup, String to) {
+
+        String message =
+                isMemberInGroup
+                        ? "Thanks for your interest. If you want to unsubscribe to this group,"
+                                + " text \"%s\" to +%s"
+                        : "Thanks for your interest. If you want to subscribe to this group,"
+                                + " text \"%s\" to +%s";
+        String actionKeyword = isMemberInGroup ? STOP_ACTION : SUBSCRIBE_ACTION;
+
+        return message.formatted(actionKeyword, to);
     }
 
     private void sendResponse(String from, String to, String response) {
