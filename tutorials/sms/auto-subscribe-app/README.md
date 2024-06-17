@@ -13,7 +13,7 @@ This directory contains sample related to Java SDK tutorials: [auto-subscribe](h
 
 ### Configure application settings
 
-Application settings is using the SpringBoot configuration file: [`application.yaml`](src/main/resources/application.yaml) file and set:
+Application settings are using the SpringBoot configuration file: [`application.yaml`](src/main/resources/application.yaml) file and enable to configure:
 
 #### Sinch credentials
 Located in `credentials` section (*you can find all of the credentials you need on your [Sinch dashboard](https://dashboard.sinch.com)*):
@@ -23,11 +23,11 @@ Located in `credentials` section (*you can find all of the credentials you need 
 
 #### Server port
 Located in `server` section:
-- port: The port to be used to listen incoming request. <em>Default: 8090</em>
+- port: The port to be used to listen to incoming requests. <em>Default: 8090</em>
 
 ### Starting server locally
 
-Compile and run the application as server onto you localhost.
+Compile and run the application as server locally.
 ```bash
 mvn spring-boot:run
 ```
@@ -56,4 +56,4 @@ Forwarding                    https://0e64-78-117-86-140.ngrok-free.app -> http:
 ```
 Contains `https://0e64-78-117-86-140.ngrok-free.app` value.
 
-This value is having to be used to configure your callback from [Sinch dashboard](https://dashboard.sinch.com/sms/api/services)
+This value must be used to configure callback's URL from your [Sinch dashboard](https://dashboard.sinch.com/sms/api/services)

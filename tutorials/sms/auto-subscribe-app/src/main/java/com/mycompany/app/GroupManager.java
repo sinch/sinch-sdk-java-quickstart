@@ -32,7 +32,7 @@ public class GroupManager {
     }
 
     /**
-     * Create, or return if already existing, group to be used for this tutorial
+     * Create or return existing group to be used for this tutorial
      *
      * @return Group to be used
      */
@@ -40,7 +40,7 @@ public class GroupManager {
 
         GroupsService groupsService = smsService.groups();
 
-        // ensure we do not create a new group if already existing with same name
+        // ensure we do not create an already existing group
         group = retrieveGroup(groupsService);
         return group.orElseGet(() -> createGroup(groupsService));
     }
