@@ -40,7 +40,7 @@ public class GroupManager {
 
         GroupsService groupsService = smsService.groups();
 
-        // ensure we do not create an already existing group
+        // ensure that we do not create a new group if one with the same name already exists
         group = retrieveGroup(groupsService);
         return group.orElseGet(() -> createGroup(groupsService));
     }

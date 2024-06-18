@@ -72,7 +72,7 @@ public class AutoSubscribeService {
             Group group, boolean isMemberInGroup, String groupPhoneNumber, String member) {
 
         if (isMemberInGroup) {
-            return "You already subscribed to '%s'. Text \"%s\" to +%s to leave this group."
+            return "You have already subscribed to '%s'. Text \"%s\" to +%s to leave this group."
                     .formatted(group.getName(), STOP_ACTION, groupPhoneNumber);
         }
 
@@ -90,7 +90,7 @@ public class AutoSubscribeService {
             Group group, boolean isMemberInGroup, String groupPhoneNumber, String member) {
 
         if (!isMemberInGroup) {
-            return "You did not subscribed to '%s'. Text \"%s\" to +%s to join this group."
+            return "You haven't subscribed to '%s' yet. Text \"%s\" to +%s to join this group."
                     .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
         }
 
@@ -108,7 +108,7 @@ public class AutoSubscribeService {
 
         String message =
                 isMemberInGroup
-                        ? "Thanks for your interest. If you want to unsubscribe to this group,"
+                        ? "Thanks for your interest. If you want to unsubscribe from this group,"
                                 + " text \"%s\" to +%s"
                         : "Thanks for your interest. If you want to subscribe to this group,"
                                 + " text \"%s\" to +%s";
