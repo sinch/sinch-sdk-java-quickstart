@@ -10,65 +10,63 @@ import voice.VoiceQuickStart;
 
 public abstract class Application {
 
-    private static final String LOGGING_PROPERTIES_FILE = "logging.properties";
-    private static final Logger LOGGER = initializeLogger();
+  private static final String LOGGING_PROPERTIES_FILE = "logging.properties";
+  private static final Logger LOGGER = initializeLogger();
 
-    public static void main(String[] args) {
-        try {
+  public static void main(String[] args) {
+    try {
 
-            SinchClient client = SinchClientHelper.initSinchClient();
-            LOGGER.info("Application initiated. SinchClient ready.");
+      SinchClient client = SinchClientHelper.initSinchClient();
+      LOGGER.info("Application initiated. SinchClient ready.");
 
-            // Numbers service dedicated business logic processing
-            // (see https://developers.sinch.com/categories/numbersandconnectivity)
-            // comment if unused
-            if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
-                NumbersQuickStart numbers = new NumbersQuickStart(client.numbers());
-            }
+      // Numbers service dedicated business logic processing
+      // (see https://developers.sinch.com/categories/numbersandconnectivity)
+      // comment if unused
+      if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
+        NumbersQuickStart numbers = new NumbersQuickStart(client.numbers());
+      }
 
-            // SMS service dedicated business logic processing
-            // (see https://developers.sinch.com/docs/sms)
-            // comment if unused
-            if (client.getConfiguration().getSmsServicePlanCredentials().isPresent()
-                    || client.getConfiguration().getUnifiedCredentials().isPresent()) {
-                SmsQuickStart sms = new SmsQuickStart(client.sms());
-            }
+      // SMS service dedicated business logic processing
+      // (see https://developers.sinch.com/docs/sms)
+      // comment if unused
+      if (client.getConfiguration().getSmsServicePlanCredentials().isPresent()
+          || client.getConfiguration().getUnifiedCredentials().isPresent()) {
+        SmsQuickStart sms = new SmsQuickStart(client.sms());
+      }
 
-            // Verification service dedicated business logic processing
-            // (see https://developers.sinch.com/docs/verification)
-            // comment if unused
-            if (client.getConfiguration().getApplicationCredentials().isPresent()) {
-                VerificationQuickStart verification =
-                        new VerificationQuickStart(client.verification());
-            }
+      // Verification service dedicated business logic processing
+      // (see https://developers.sinch.com/docs/verification)
+      // comment if unused
+      if (client.getConfiguration().getApplicationCredentials().isPresent()) {
+        VerificationQuickStart verification = new VerificationQuickStart(client.verification());
+      }
 
-            // Voice service dedicated business logic processing
-            // (see https://developers.sinch.com/docs/voice)
-            // comment if unused
-            if (client.getConfiguration().getApplicationCredentials().isPresent()) {
-                VoiceQuickStart voice = new VoiceQuickStart(client.voice());
-            }
+      // Voice service dedicated business logic processing
+      // (see https://developers.sinch.com/docs/voice)
+      // comment if unused
+      if (client.getConfiguration().getApplicationCredentials().isPresent()) {
+        VoiceQuickStart voice = new VoiceQuickStart(client.voice());
+      }
 
-        } catch (Exception e) {
-            LOGGER.severe(String.format("Application failure: %s", e.getMessage()));
-        }
+    } catch (Exception e) {
+      LOGGER.severe(String.format("Application failure: %s", e.getMessage()));
     }
+  }
 
-    static Logger initializeLogger() {
-        try (InputStream logConfigInputStream =
-                Application.class.getClassLoader().getResourceAsStream(LOGGING_PROPERTIES_FILE)) {
+  static Logger initializeLogger() {
+    try (InputStream logConfigInputStream =
+        Application.class.getClassLoader().getResourceAsStream(LOGGING_PROPERTIES_FILE)) {
 
-            if (logConfigInputStream != null) {
-                LogManager.getLogManager().readConfiguration(logConfigInputStream);
-            } else {
-                throw new RuntimeException(
-                        String.format(
-                                "The file '%s' couldn't be loaded.", LOGGING_PROPERTIES_FILE));
-            }
+      if (logConfigInputStream != null) {
+        LogManager.getLogManager().readConfiguration(logConfigInputStream);
+      } else {
+        throw new RuntimeException(
+            String.format("The file '%s' couldn't be loaded.", LOGGING_PROPERTIES_FILE));
+      }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        return Logger.getLogger(Application.class.getName());
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage());
     }
+    return Logger.getLogger(Application.class.getName());
+  }
 }

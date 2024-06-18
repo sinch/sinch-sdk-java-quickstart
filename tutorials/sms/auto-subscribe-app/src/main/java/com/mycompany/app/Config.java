@@ -10,26 +10,26 @@ import org.springframework.context.annotation.Bean;
 @org.springframework.context.annotation.Configuration
 public class Config {
 
-    @Value("${credentials.project-id}")
-    String projectId;
+  @Value("${credentials.project-id}")
+  String projectId;
 
-    @Value("${credentials.key-id}")
-    String keyId;
+  @Value("${credentials.key-id}")
+  String keyId;
 
-    @Value("${credentials.key-secret}")
-    String keySecret;
+  @Value("${credentials.key-secret}")
+  String keySecret;
 
-    @Bean
-    public SMSService smsService() {
+  @Bean
+  public SMSService smsService() {
 
-        var configuration =
-                Configuration.builder()
-                        .setProjectId(projectId)
-                        .setKeyId(keyId)
-                        .setKeySecret(keySecret)
-                        .setSmsRegion(SMSRegion.US)
-                        .build();
+    var configuration =
+        Configuration.builder()
+            .setProjectId(projectId)
+            .setKeyId(keyId)
+            .setKeySecret(keySecret)
+            .setSmsRegion(SMSRegion.US)
+            .build();
 
-        return new SinchClient(configuration).sms();
-    }
+    return new SinchClient(configuration).sms();
+  }
 }

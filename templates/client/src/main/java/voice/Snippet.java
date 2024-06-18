@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 
 public class Snippet {
 
-    private static final Logger LOGGER = Logger.getLogger(Snippet.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(Snippet.class.getName());
 
-    static void execute(VoiceService voiceService) {
+  static void execute(VoiceService voiceService) {
 
-        LOGGER.info("Snippet execution");
-    }
+    LOGGER.info("Snippet execution");
+  }
 }
