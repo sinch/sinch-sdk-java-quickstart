@@ -36,7 +36,6 @@
 
             <googleJavaFormat>
               <version>1.22.0</version>
-              <style>AOSP</style>
               <reflowLongStrings>true</reflowLongStrings>
             </googleJavaFormat>
             <endWithNewline />
