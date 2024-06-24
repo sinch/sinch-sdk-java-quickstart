@@ -1,6 +1,6 @@
 package verification;
 
-import com.sinch.sdk.domains.verification.VerificationService;
+import com.sinch.sdk.domains.verification.api.v1.VerificationService;
 import java.util.logging.Logger;
 
 public class Snippet {
