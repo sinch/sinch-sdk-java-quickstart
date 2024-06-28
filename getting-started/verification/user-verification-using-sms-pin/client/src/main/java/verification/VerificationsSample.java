@@ -21,16 +21,16 @@ public class VerificationsSample {
 
   public void start() {
 
-    E164PhoneNumber e164Number = queryPhoneNumber();
+    E164PhoneNumber e164Number = promptPhoneNumber();
 
     try {
       // Starting verification onto phone number
       String id = startSmsVerification(verificationService.verificationStart(), e164Number);
 
       // Ask user for received code
-      String code = queryCode();
+      Integer code = promptSmsCode();
 
-      // Query report
+      // Submit the verification report
       reportSmsVerification(verificationService.verificationReport(), code, id);
     } catch (ApiException e) {
       echo("Error (%d): %s", e.getCode(), e.getMessage());
@@ -60,16 +60,16 @@ public class VerificationsSample {
   }
 
   /**
-   * Will query for a verification report by ID
+   * Will use Sinch product to retrieve verification report by ID
    *
    * @param service Verification service
    * @param code Code received by SMS
    * @param id Verification ID related to the verification
    */
-  private void reportSmsVerification(VerificationReportService service, String code, String id) {
+  private void reportSmsVerification(VerificationReportService service, Integer code, String id) {
 
     VerificationReportRequestSms parameters =
-        VerificationReportRequestSms.builder().setCode(code).build();
+        VerificationReportRequestSms.builder().setCode(String.valueOf(code)).build();
 
     echo("Requesting report for '%s'", id);
     VerificationReportResponseSms response = service.reportSmsById(id, parameters);
@@ -77,11 +77,11 @@ public class VerificationsSample {
   }
 
   /**
-   * Query user for a valid phone number
+   * Prompt user for a valid phone number
    *
    * @return Phone number value
    */
-  private E164PhoneNumber queryPhoneNumber() {
+  private E164PhoneNumber promptPhoneNumber() {
     String input;
     boolean valid;
     do {
@@ -96,12 +96,22 @@ public class VerificationsSample {
   }
 
   /**
-   * Query user for a code
+   * Prompt user for a SMS code
    *
    * @return Value entered by user
    */
-  private String queryCode() {
-    return prompt("Enter the verification code to report the verification");
+  private Integer promptSmsCode() {
+    Integer code = null;
+    do {
+      String input = prompt("Enter the verification code to report the verification");
+      try {
+        code = Integer.valueOf(input);
+      } catch (NumberFormatException nfe) {
+        echo("Invalid value '%s' (code should be numeric)", input);
+      }
+
+    } while (null == code);
+    return code;
   }
 
   /**
