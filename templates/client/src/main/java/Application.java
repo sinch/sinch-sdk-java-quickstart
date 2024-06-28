@@ -38,7 +38,8 @@ public abstract class Application {
       // (see https://developers.sinch.com/docs/verification)
       // comment if unused
       if (client.getConfiguration().getApplicationCredentials().isPresent()) {
-        VerificationQuickStart verification = new VerificationQuickStart(client.verification());
+        VerificationQuickStart verification =
+            new VerificationQuickStart(client.verification().v1());
       }
 
       // Voice service dedicated business logic processing
