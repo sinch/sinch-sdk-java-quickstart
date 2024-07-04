@@ -23,7 +23,7 @@ public abstract class Application {
       // (see https://developers.sinch.com/categories/numbersandconnectivity)
       // comment if unused
       if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
-        NumbersQuickStart numbers = new NumbersQuickStart(client.numbers());
+        NumbersQuickStart numbers = new NumbersQuickStart(client.numbers().v1());
       }
 
       // SMS service dedicated business logic processing
