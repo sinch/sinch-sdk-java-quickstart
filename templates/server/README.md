@@ -1,4 +1,4 @@
-# Server application based onto Sinch Java SDK to server webhooks
+# Backend application built using Sinch Java SDK to handle incoming webhooks
 
 This directory contains a server application based onto [Sinch SDK java](https://github.com/sinch/sinch-sdk-java)
 
