@@ -1,6 +1,6 @@
 package numbers;
 
-import com.sinch.sdk.domains.numbers.NumbersService;
+import com.sinch.sdk.domains.numbers.api.v1.NumbersService;
 import java.util.logging.Logger;
 
 public class Snippet {
