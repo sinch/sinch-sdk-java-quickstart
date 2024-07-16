@@ -1,24 +1,18 @@
 package com.mycompany.app.voice;
 
-import com.sinch.sdk.domains.voice.models.svaml.ActionConnectConference;
-import com.sinch.sdk.domains.voice.models.svaml.ActionConnectPstn;
-import com.sinch.sdk.domains.voice.models.svaml.Instruction;
-import com.sinch.sdk.domains.voice.models.svaml.InstructionSay;
 import com.sinch.sdk.domains.voice.models.svaml.SVAMLControl;
 import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.DisconnectCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.IncomingCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.NotifyEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
-@Component("VoiceWebhooksBusinessLogic")
-public class WebhooksBusinessLogic {
+@Component("VoiceServerBusinessLogic")
+public class ServerBusinessLogic {
 
-  private static final Logger LOGGER = Logger.getLogger(WebhooksBusinessLogic.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
   public SVAMLControl incoming(IncomingCallEvent event) {
 

@@ -8,10 +8,10 @@ import com.sinch.sdk.domains.sms.models.webhooks.WebhooksEvent;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
-@Component("SMSWebhooksBusinessLogic")
-public class WebhooksBusinessLogic {
+@Component("SMSServerBusinessLogic")
+public class ServerBusinessLogic {
 
-  private static final Logger LOGGER = Logger.getLogger(WebhooksBusinessLogic.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
   public void processInboundEvent(InboundText event) {
     trace(event);

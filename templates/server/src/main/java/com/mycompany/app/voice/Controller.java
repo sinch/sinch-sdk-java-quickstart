@@ -22,11 +22,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class Controller {
 
   private final SinchClient sinchClient;
-  private final WebhooksBusinessLogic webhooksBusinessLogic;
+  private final ServerBusinessLogic webhooksBusinessLogic;
   private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
   @Autowired
-  public Controller(SinchClient sinchClient, WebhooksBusinessLogic webhooksBusinessLogic) {
+  public Controller(SinchClient sinchClient, ServerBusinessLogic webhooksBusinessLogic) {
     this.sinchClient = sinchClient;
     this.webhooksBusinessLogic = webhooksBusinessLogic;
   }

@@ -20,10 +20,10 @@ public class Controller {
 
   private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
   private final SinchClient sinchClient;
-  private final WebhooksBusinessLogic webhooksBusinessLogic;
+  private final ServerBusinessLogic webhooksBusinessLogic;
 
   @Autowired
-  public Controller(SinchClient sinchClient, WebhooksBusinessLogic webhooksBusinessLogic) {
+  public Controller(SinchClient sinchClient, ServerBusinessLogic webhooksBusinessLogic) {
     this.sinchClient = sinchClient;
     this.webhooksBusinessLogic = webhooksBusinessLogic;
   }
