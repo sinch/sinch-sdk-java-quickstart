@@ -5,7 +5,7 @@ logging:
     com: INFO
 
 server:
-    port: 8080
+  port: 8090
 
 credentials:
   # Unified related credentials, used by:
