@@ -9,6 +9,7 @@ import com.sinch.sdk.domains.sms.models.InboundText;
 import com.sinch.sdk.domains.sms.models.webhooks.WebhooksEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class Controller {
       value = "/SmsEvent",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public void smsDeliveryEvent(@RequestBody String body) {
+  public ResponseEntity<Void> smsDeliveryEvent(@RequestBody String body) {
 
     WebHooksService webhooks = sinchClient.sms().webHooks();
 
@@ -44,5 +45,7 @@ public class Controller {
       case DeliveryReportBatch e -> webhooksBusinessLogic.processDeliveryReportEvent(e);
       default -> throw new IllegalStateException("Unexpected value: " + event);
     }
+
+    return ResponseEntity.ok().build();
   }
 }

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -35,7 +36,8 @@ public class Controller {
       value = "/VoiceEvent",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public String VoiceEvent(@RequestHeader Map<String, String> headers, @RequestBody String body) {
+  public ResponseEntity<String> VoiceEvent(
+      @RequestHeader Map<String, String> headers, @RequestBody String body) {
 
     WebHooksService webhooks = sinchClient.voice().webhooks();
 
@@ -79,14 +81,13 @@ public class Controller {
           default -> throw new IllegalStateException("Unexpected value: " + event);
         };
 
-    if (null == response) {
-      return "";
+    String serializedResponse = "";
+    if (null != response) {
+      serializedResponse = webhooks.serializeWebhooksResponse(response);
     }
-
-    String serializedResponse = webhooks.serializeWebhooksResponse(response);
 
     LOGGER.finest("JSON response: " + serializedResponse);
 
-    return serializedResponse;
+    return ResponseEntity.ok().body(serializedResponse);
   }
 }
