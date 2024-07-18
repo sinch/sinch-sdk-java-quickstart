@@ -23,23 +23,23 @@ public class ServerBusinessLogic {
 
   public SVAMLControl answered(AnsweredCallEvent event) {
 
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
 
     return SVAMLControl.builder().build();
   }
 
   public void disconnect(DisconnectCallEvent event) {
 
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
   }
 
   public void prompt(PromptInputEvent event) {
 
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
   }
 
   public void notify(NotifyEvent event) {
 
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
   }
 }

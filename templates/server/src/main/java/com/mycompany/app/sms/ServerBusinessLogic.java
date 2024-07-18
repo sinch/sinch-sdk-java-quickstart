@@ -30,6 +30,6 @@ public class ServerBusinessLogic {
   }
 
   private void trace(WebhooksEvent event) {
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
   }
 }

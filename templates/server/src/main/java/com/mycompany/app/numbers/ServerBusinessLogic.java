@@ -11,6 +11,6 @@ public class ServerBusinessLogic {
 
   public void numbersEvent(NumberEvent event) {
 
-    LOGGER.info("Handle event :" + event);
+    LOGGER.info("Handle event: " + event);
   }
 }
