@@ -1,6 +1,6 @@
 # qualify leads application sample
 
-This directory contains sample related to Java SDK tutorials: [auto-subscribe](https://developers.sinch.com/docs/sms/tutorials/sms/tutorials/java-sdk/auto-subscribe)
+This directory contains sample related to Java SDK tutorials: [qualify leads](https://developers.sinch.com/docs/sms/tutorials/sms/tutorials/java-sdk/auto-subscribe)
 
 ## Requirements
 
@@ -55,4 +55,4 @@ Forwarding                    https://0e64-78-117-86-140.ngrok-free.app -> http:
 ```
 Contains `https://0e64-78-117-86-140.ngrok-free.app` value.
 
-This value must be used to configure callback's URL from your [Sinch dashboard](https://dashboard.sinch.com/sms/api/services)
+This value must be used to configure the callback URL on your [Sinch dashboard](https://dashboard.sinch.com/voice/apps)
