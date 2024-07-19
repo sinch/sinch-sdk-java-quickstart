@@ -101,7 +101,7 @@ public class QualifyLeadsService {
             .setCli("YOUR_sinch_number")
             .build())
         .setInstructions(Collections.singletonList(InstructionSay.builder()
-            .setText(null)
+            .setText("Thanks for agreeing to speak to one of our sales reps! We'll now connect your call.")
             .build()))
         .build();
   }
