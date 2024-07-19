@@ -1,0 +1,12 @@
+# springboot related config file
+
+logging:
+  level:
+    com: INFO
+
+server:
+    port: 8090
+
+credentials:
+  application-key:
+  application-secret:
