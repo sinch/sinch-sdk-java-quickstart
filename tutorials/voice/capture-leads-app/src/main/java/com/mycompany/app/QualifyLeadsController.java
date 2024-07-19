@@ -15,11 +15,17 @@ public class QualifyLeadsController {
 
   private final VoiceService voiceService;
   private final QualifyLeadsService service;
+  private final CalloutService calloutService;
   
   @Autowired
-  public QualifyLeadsController(VoiceService voiceService, QualifyLeadsService service) {
+  public QualifyLeadsController(VoiceService voiceService, QualifyLeadsService service, CalloutService calloutService) {
     this.voiceService = voiceService;
     this.service = service;
+    this.calloutService = calloutService;
+  }
+
+  public void callout() {
+    calloutService.makeCallout();
   }
 
   @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -36,5 +42,4 @@ public class QualifyLeadsController {
       throw new IllegalStateException("Unexpected value: " + event);
     }
   }
-
 }
