@@ -28,3 +28,6 @@ sms:
 
 # Secret value set for Numbers webhooks calls validation
 numbers.webhooks.secret:
+
+# Secret value set for Conversation webhooks calls validation
+conversation.webhooks.secret:

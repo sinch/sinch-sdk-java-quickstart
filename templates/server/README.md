@@ -44,12 +44,13 @@ Located in `server` section:
 ### EndPoints
 When server is online, declared controllers will respond to following endpoints
 
-| Service      | Endpoint           | 
-|--------------|--------------------|
-| Numbers      | /NumbersEvent      |
-| SMS          | /SmsEvent          |
-| Verification | /VerificationEvent |
-| Voice        | /VoiceEvent        |
+| Service                                                                                                                                                                | Endpoint          | 
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| [Conversation](https://developers.sinch.com/docs/conversation/callbacks)                                                                                               | /ConversationEvent |
+| [Numbers](https://developers.sinch.com/docs/numbers/api-reference/numbers/tag/Numbers-Callbacks/#tag/Numbers-Callbacks/operation/ImportedNumberService_EventsCallback) | /NumbersEvent     |
+| [SMS](https://developers.sinch.com/docs/sms/api-reference/sms/tag/Webhooks/#tag/Webhooks/section/Callbacks)                                                            | /SmsEvent         |
+| [Verification](https://developers.sinch.com/docs/verification/api-reference/verification/tag/Verification-callbacks/)                                                  | /VerificationEvent |
+| [Voice](https://developers.sinch.com/docs/voice/api-reference/voice/tag/Callbacks/)                                                                                                                                                              | /VoiceEvent       |
 
 ## Use ngrok to forward request to local server
 
