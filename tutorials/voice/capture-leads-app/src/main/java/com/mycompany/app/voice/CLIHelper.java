@@ -10,6 +10,7 @@ import com.sinch.sdk.domains.voice.models.svaml.SVAMLControl;
 import com.sinch.sdk.models.E164PhoneNumber;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +20,10 @@ import org.springframework.stereotype.Component;
 // dedicated and dedicated CLI application
 public class CLIHelper implements CommandLineRunner {
 
-  private final CalloutsService calloutsService;
+  @Value("${sinch_number}")
+  String sinchNumber;
 
-  private final String SINCH_NUMBER = "YOUR_sinch_number";
+  private final CalloutsService calloutsService;
 
   @Autowired
   public CLIHelper(VoiceService voiceService) {
@@ -47,7 +49,7 @@ public class CLIHelper implements CommandLineRunner {
                         .setAction(
                             ActionConnectPstn.builder()
                                 .setNumber(phoneNumber)
-                                .setCli(SINCH_NUMBER)
+                                .setCli(sinchNumber)
                                 .setAnsweringMachineDetection(
                                     AnsweringMachineDetection.builder().setEnabled(true).build())
                                 .build())

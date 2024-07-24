@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("VoiceServerBusinessLogic")
@@ -34,9 +35,13 @@ public class ServerBusinessLogic {
 
   private final String NON_SIP_MENU = "non-sip";
 
-  private final String SIP_ADDRESS = "YOUR_sip_address";
-  private final String SINCH_NUMBER = "YOUR_sinch_number";
   private final String PHONE_NUMBER = "YOUR_phone_number";
+
+  @Value("${sinch_number}")
+  String sinchNumber;
+
+  @Value("${sip_address}")
+  String sipAddress;
 
   private final List<Instruction> responseInstructions =
       Collections.singletonList(
@@ -76,8 +81,8 @@ public class ServerBusinessLogic {
     return SVAMLControl.builder()
         .setAction(
             ActionConnectSip.builder()
-                .setDestination(DestinationSip.valueOf(SIP_ADDRESS))
-                .setCli(SINCH_NUMBER)
+                .setDestination(DestinationSip.valueOf(sipAddress))
+                .setCli(sinchNumber)
                 .setTransport(TransportType.TLS)
                 .build())
         .setInstructions(responseInstructions)
@@ -90,7 +95,7 @@ public class ServerBusinessLogic {
         .setAction(
             ActionConnectPstn.builder()
                 .setNumber(E164PhoneNumber.valueOf(PHONE_NUMBER))
-                .setCli(SINCH_NUMBER)
+                .setCli(sinchNumber)
                 .build())
         .setInstructions(responseInstructions)
         .build();
