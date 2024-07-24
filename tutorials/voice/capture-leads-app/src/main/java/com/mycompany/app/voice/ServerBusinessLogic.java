@@ -37,10 +37,10 @@ public class ServerBusinessLogic {
 
   private final String PHONE_NUMBER = "YOUR_phone_number";
 
-  @Value("${sinch_number}")
+  @Value("${sinch-number}")
   String sinchNumber;
 
-  @Value("${sip_address}")
+  @Value("${sip-address}")
   String sipAddress;
 
   private final List<Instruction> responseInstructions =

@@ -15,12 +15,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-// wWe are basing this tutorial onto mixin a command line feature with server side backend
-// This is not a proper CLI usage outside an educational purpose and this class should have been
-// dedicated and dedicated CLI application
 public class CLIHelper implements CommandLineRunner {
 
-  @Value("${sinch_number}")
+  @Value("${sinch-number}")
   String sinchNumber;
 
   private final CalloutsService calloutsService;

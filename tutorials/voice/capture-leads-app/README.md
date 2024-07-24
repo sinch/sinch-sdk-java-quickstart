@@ -1,6 +1,11 @@
-# qualify leads application sample
+# Qualify leads application sample
 
-This directory contains sample related to Java SDK tutorials: [qualify leads](https://developers.sinch.com/docs/sms/tutorials/sms/tutorials/java-sdk/auto-subscribe)
+This directory contains sample related to Java SDK tutorials: [qualify leads](https://developers.sinch.com/docs/voice/tutorials/capture-leads)
+
+## DISCLAIMER
+This tutorial is based on mixing a command-line function with a server-side backend service.
+
+It is not a correct use of the CLI outside of an educational purpose.
 
 ## Requirements
 
@@ -17,8 +22,13 @@ Application settings are using the SpringBoot configuration file: [`application.
 
 #### Sinch credentials
 Located in `credentials` section (*you can find all of the credentials you need on your [Sinch dashboard](https://dashboard.sinch.com)*):
-- `application-key`: YOUR_application_key
-- `application-secret`: YOUR_application_secret
+- `application-api-key`: YOUR_application_key
+- `application-api-secret`: YOUR_application_secret
+
+#### Required values
+Tutorial features are using some values used by Voice product:
+- `sinch-number`: 
+- `sip-address`: 
 
 #### Server port
 Located in `server` section:
@@ -35,7 +45,7 @@ mvn spring-boot:run
 
 Forwarding request to same `8090` port used above:
 
-*Note: The `8090` value is coming from default config and can be changed (see [Server port](#Server port) configuration section)*
+*Note: The `8090` value is coming from default config and can be changed (see [Server port](#Server-port) configuration section)*
 
 ```bash
 ngrok http 8090

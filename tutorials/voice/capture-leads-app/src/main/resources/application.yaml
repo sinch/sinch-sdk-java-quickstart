@@ -10,5 +10,5 @@ server:
 credentials:
   application-api-key:
   application-api-secret: 
-sinch_number: YOUR_sinch_number
-sip_address: YOUR_sip_address
+sinch-number: YOUR_sinch_number
+sip-address: YOUR_sip_address
