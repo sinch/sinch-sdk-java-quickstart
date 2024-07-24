@@ -20,3 +20,6 @@ credentials:
   # - Voice
   application-api-key:
   application-api-secret: 
+
+# Secret value set for Numbers webhooks calls validation
+numbers.webhooks.secret:
