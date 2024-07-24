@@ -2,9 +2,11 @@ package com.mycompany.app.voice;
 
 import com.sinch.sdk.domains.voice.VoiceService;
 import com.sinch.sdk.domains.voice.WebHooksService;
-import com.sinch.sdk.domains.voice.models.webhooks.CallEvent;
+import com.sinch.sdk.domains.voice.models.svaml.SVAMLControl;
+import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
+import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,12 +56,22 @@ public class Controller {
     // decode the request payload
     var event = webhooks.unserializeWebhooksEvent(body);
 
+    Optional<SVAMLControl> response = Optional.empty();
+
     // let business layer process the request
-    if (Objects.requireNonNull(event) instanceof CallEvent e) {
-      return ResponseEntity.ok()
-          .body(webhooks.serializeWebhooksResponse(webhooksBusinessLogic.processCallEvent(e)));
-    } else {
-      throw new IllegalStateException("Unexpected value: " + event);
+    if (event instanceof AnsweredCallEvent e) {
+      response = Optional.of(webhooksBusinessLogic.answeredCallEvent(e));
     }
+    if (event instanceof PromptInputEvent e) {
+      response = Optional.of(webhooksBusinessLogic.promptInputEvent(e));
+    }
+
+    if (response.isEmpty()) {
+      return ResponseEntity.ok().body("");
+    }
+
+    String serializedResponse = webhooks.serializeWebhooksResponse(response.get());
+
+    return ResponseEntity.ok().body(serializedResponse);
   }
 }

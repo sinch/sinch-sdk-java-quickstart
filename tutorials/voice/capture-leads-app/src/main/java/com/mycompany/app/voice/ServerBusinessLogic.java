@@ -14,7 +14,6 @@ import com.sinch.sdk.domains.voice.models.svaml.MenuOptionActionType;
 import com.sinch.sdk.domains.voice.models.svaml.SVAMLControl;
 import com.sinch.sdk.domains.voice.models.webhooks.AmdAnswerStatusType;
 import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.CallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
 import com.sinch.sdk.models.DualToneMultiFrequency;
 import com.sinch.sdk.models.E164PhoneNumber;
@@ -28,21 +27,7 @@ public class ServerBusinessLogic {
 
   private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
-  public SVAMLControl processCallEvent(CallEvent event) {
-
-    LOGGER.info("Received event:" + event);
-
-    if (event instanceof AnsweredCallEvent) {
-      return parseAnsweredCallEvent(((AnsweredCallEvent) event));
-    }
-    if (event instanceof PromptInputEvent) {
-      return parsePromptInputEvent(((PromptInputEvent) event));
-    } else {
-      throw new IllegalStateException("Unexpected value: " + event);
-    }
-  }
-
-  public SVAMLControl parseAnsweredCallEvent(AnsweredCallEvent event) {
+  public SVAMLControl answeredCallEvent(AnsweredCallEvent event) {
 
     var amdResult = event.getAmd();
 
@@ -56,7 +41,7 @@ public class ServerBusinessLogic {
     }
   }
 
-  public SVAMLControl parsePromptInputEvent(PromptInputEvent event) {
+  public SVAMLControl promptInputEvent(PromptInputEvent event) {
     var menuResult = event.getMenuResult();
 
     if (menuResult.getValue() == "sip") {
@@ -69,7 +54,7 @@ public class ServerBusinessLogic {
     }
   }
 
-  SVAMLControl sipResponse() {
+  private SVAMLControl sipResponse() {
 
     return SVAMLControl.builder()
         .setAction(
@@ -88,7 +73,7 @@ public class ServerBusinessLogic {
         .build();
   }
 
-  SVAMLControl nonSipResponse() {
+  private SVAMLControl nonSipResponse() {
 
     return SVAMLControl.builder()
         .setAction(
@@ -106,7 +91,7 @@ public class ServerBusinessLogic {
         .build();
   }
 
-  SVAMLControl defaultResponse() {
+  private SVAMLControl defaultResponse() {
 
     return SVAMLControl.builder()
         .setAction(ActionHangUp.builder().build())
@@ -118,7 +103,7 @@ public class ServerBusinessLogic {
         .build();
   }
 
-  SVAMLControl humanResponse() {
+  private SVAMLControl humanResponse() {
 
     var option1 =
         MenuOption.builder()
@@ -160,7 +145,7 @@ public class ServerBusinessLogic {
         .build();
   }
 
-  SVAMLControl machineResponse() {
+  private SVAMLControl machineResponse() {
 
     return SVAMLControl.builder()
         .setAction(ActionHangUp.builder().build())
