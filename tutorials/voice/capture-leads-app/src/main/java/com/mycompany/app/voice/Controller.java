@@ -36,22 +36,7 @@ public class Controller {
   public ResponseEntity<String> VoiceEvent(
       @RequestHeader Map<String, String> headers, @RequestBody String body) {
 
-    // ensure valid authentication to handle request
-    var validAuth =
-        webhooks.validateAuthenticatedRequest(
-            // The HTTP verb this controller is managing
-            "POST",
-            // The URI this controller is managing
-            "/VoiceEvent",
-            // request headers
-            headers,
-            // request payload body
-            body);
-
-    // token validation failed
-    if (!validAuth) {
-      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-    }
+    validateRequest(headers, body);
 
     // decode the request payload
     var event = webhooks.unserializeWebhooksEvent(body);
@@ -73,5 +58,24 @@ public class Controller {
     String serializedResponse = webhooks.serializeWebhooksResponse(response.get());
 
     return ResponseEntity.ok().body(serializedResponse);
+  }
+
+  void validateRequest(Map<String, String> headers, String body) {
+
+    var validAuth =
+        webhooks.validateAuthenticatedRequest(
+            // The HTTP verb this controller is managing
+            "POST",
+            // The URI this controller is managing
+            "/VoiceEvent",
+            // request headers
+            headers,
+            // request payload body
+            body);
+
+    // token validation failed
+    if (!validAuth) {
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+    }
   }
 }
