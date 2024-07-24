@@ -122,15 +122,15 @@ public class ServerBusinessLogic {
 
     String mainPrompt =
         String.format(
-            "Hi, you awesome person! Press '%s' if you have performed this tutorial using a sip"
+            "#tts[Hi, you awesome person! Press '%s' if you have performed this tutorial using a sip"
                 + " infrastructure. Press '%s' if you have not used a sip infrastructure. Press any"
-                + " other digit to end this call.",
+                + " other digit to end this call.]",
             SIP_MENU_OPTION, NON_SIP_MENU_OPTION);
 
     String repeatPrompt =
         String.format(
-            "Again, simply press '%s' if you have used sip, press '%s' if you have not, or press"
-                + " any other digit to end this call.",
+            "#tts[Again, simply press '%s' if you have used sip, press '%s' if you have not, or press"
+                + " any other digit to end this call.]",
             SIP_MENU_OPTION, NON_SIP_MENU_OPTION);
 
     MenuOption option1 =
