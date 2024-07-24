@@ -55,9 +55,8 @@ public class ServerBusinessLogic {
     }
     if (amdResult.getStatus() == AmdAnswerStatusType.HUMAN) {
       return humanResponse();
-    } else {
-      throw new IllegalStateException("Unexpected value: " + event);
     }
+    throw new IllegalStateException("Unexpected value: " + event);
   }
 
   public SVAMLControl promptInputEvent(PromptInputEvent event) {
@@ -68,9 +67,8 @@ public class ServerBusinessLogic {
     }
     if (NON_SIP_MENU.equals(menuResult.getValue())) {
       return nonSipResponse();
-    } else {
-      return defaultResponse();
     }
+    return defaultResponse();
   }
 
   private SVAMLControl sipResponse() {
