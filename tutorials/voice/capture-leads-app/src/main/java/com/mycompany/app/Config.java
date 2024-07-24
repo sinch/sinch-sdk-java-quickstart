@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 @org.springframework.context.annotation.Configuration
 public class Config {
 
-  @Value("${credentials.application-key}")
+  @Value("${credentials.application-api-key}")
   String applicationKey;
 
-  @Value("${credentials.application-secret}")
+  @Value("${credentials.application-api-secret}")
   String applicationSecret;
 
   @Bean
