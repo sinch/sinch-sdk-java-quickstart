@@ -10,5 +10,7 @@ server:
 credentials:
   application-api-key:
   application-api-secret: 
-sinch-number: YOUR_sinch_number
-sip-address: YOUR_sip_address
+
+# see README.md, "Required values" section for details about these settings
+sinch-number:
+sip-address:

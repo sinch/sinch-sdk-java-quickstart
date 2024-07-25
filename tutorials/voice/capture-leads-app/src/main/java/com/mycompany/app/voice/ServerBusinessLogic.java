@@ -35,8 +35,6 @@ public class ServerBusinessLogic {
 
   private final String NON_SIP_MENU = "non-sip";
 
-  private final String PHONE_NUMBER = "YOUR_phone_number";
-
   @Value("${sinch-number}")
   String sinchNumber;
 
@@ -50,6 +48,8 @@ public class ServerBusinessLogic {
                   "Thanks for agreeing to speak to one of our sales reps! We'll now connect"
                       + " your call.")
               .build());
+  @Value("${sales-phone-number}")
+  String salesPhoneNumber;
 
   public SVAMLControl answeredCallEvent(AnsweredCallEvent event) {
 
@@ -91,13 +91,17 @@ public class ServerBusinessLogic {
 
   private SVAMLControl nonSipResponse() {
 
+    String instruction =
+        "Thank you for choosing to speak to one of our sales reps! If this were in production, at"
+            + " this point you would be connected to a sales rep on your sip network. Since you do"
+            + " not, you have now completed this tutorial. We hope you had fun and learned"
+            + " something new. Be sure to keep visiting https://developers.sinch.com for more great"
+            + " tutorials.";
+
     return SVAMLControl.builder()
-        .setAction(
-            ActionConnectPstn.builder()
-                .setNumber(E164PhoneNumber.valueOf(PHONE_NUMBER))
-                .setCli(sinchNumber)
-                .build())
-        .setInstructions(responseInstructions)
+        .setAction(ActionHangUp.builder().build())
+        .setInstructions(
+            Collections.singletonList(InstructionSay.builder().setText(instruction).build()))
         .build();
   }
 
