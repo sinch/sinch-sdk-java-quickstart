@@ -1,6 +1,6 @@
 # Qualify leads application sample
 
-This directory contains sample related to Java SDK tutorials: [qualify leads](https://developers.sinch.com/docs/voice/tutorials/capture-leads)
+This directory contains samples related to Java SDK tutorials: [qualify leads](https://developers.sinch.com/docs/voice/tutorials/qualify-leads/java)
 
 ## DISCLAIMER
 This tutorial is based on mixing a command-line function with a server-side backend service.
