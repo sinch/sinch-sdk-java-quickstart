@@ -2,11 +2,9 @@ package com.mycompany.app.voice;
 
 import com.sinch.sdk.domains.voice.models.DestinationSip;
 import com.sinch.sdk.domains.voice.models.TransportType;
-import com.sinch.sdk.domains.voice.models.svaml.ActionConnectPstn;
 import com.sinch.sdk.domains.voice.models.svaml.ActionConnectSip;
 import com.sinch.sdk.domains.voice.models.svaml.ActionHangUp;
 import com.sinch.sdk.domains.voice.models.svaml.ActionRunMenu;
-import com.sinch.sdk.domains.voice.models.svaml.Instruction;
 import com.sinch.sdk.domains.voice.models.svaml.InstructionSay;
 import com.sinch.sdk.domains.voice.models.svaml.Menu;
 import com.sinch.sdk.domains.voice.models.svaml.MenuOption;
@@ -17,19 +15,14 @@ import com.sinch.sdk.domains.voice.models.webhooks.AmdAnswerStatusType;
 import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
 import com.sinch.sdk.models.DualToneMultiFrequency;
-import com.sinch.sdk.models.E164PhoneNumber;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("VoiceServerBusinessLogic")
 public class ServerBusinessLogic {
-
-  private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
   private final String SIP_MENU = "sip";
 
@@ -40,16 +33,6 @@ public class ServerBusinessLogic {
 
   @Value("${sip-address}")
   String sipAddress;
-
-  private final List<Instruction> responseInstructions =
-      Collections.singletonList(
-          InstructionSay.builder()
-              .setText(
-                  "Thanks for agreeing to speak to one of our sales reps! We'll now connect"
-                      + " your call.")
-              .build());
-  @Value("${sales-phone-number}")
-  String salesPhoneNumber;
 
   public SVAMLControl answeredCallEvent(AnsweredCallEvent event) {
 
@@ -78,6 +61,9 @@ public class ServerBusinessLogic {
 
   private SVAMLControl sipResponse() {
 
+    String instruction =
+        "Thanks for agreeing to speak to one of our sales reps! We'll now connect your call.";
+
     return SVAMLControl.builder()
         .setAction(
             ActionConnectSip.builder()
@@ -85,7 +71,8 @@ public class ServerBusinessLogic {
                 .setCli(sinchNumber)
                 .setTransport(TransportType.TLS)
                 .build())
-        .setInstructions(responseInstructions)
+        .setInstructions(
+            Collections.singletonList(InstructionSay.builder().setText(instruction).build()))
         .build();
   }
 
@@ -107,15 +94,12 @@ public class ServerBusinessLogic {
 
   private SVAMLControl defaultResponse() {
 
-    List<Instruction> defaultResponseInstructions =
-        Collections.singletonList(
-            InstructionSay.builder()
-                .setText("Thank you for trying our tutorial! This call will now end.")
-                .build());
+    String instruction = "Thank you for trying our tutorial! This call will now end.";
 
     return SVAMLControl.builder()
         .setAction(ActionHangUp.builder().build())
-        .setInstructions(defaultResponseInstructions)
+        .setInstructions(
+            Collections.singletonList(InstructionSay.builder().setText(instruction).build()))
         .build();
   }
 
@@ -126,15 +110,15 @@ public class ServerBusinessLogic {
 
     String mainPrompt =
         String.format(
-            "#tts[Hi, you awesome person! Press '%s' if you have performed this tutorial using a sip"
-                + " infrastructure. Press '%s' if you have not used a sip infrastructure. Press any"
-                + " other digit to end this call.]",
+            "#tts[Hi, you awesome person! Press '%s' if you have performed this tutorial using a"
+                + " sip infrastructure. Press '%s' if you have not used a sip infrastructure. Press"
+                + " any other digit to end this call.]",
             SIP_MENU_OPTION, NON_SIP_MENU_OPTION);
 
     String repeatPrompt =
         String.format(
-            "#tts[Again, simply press '%s' if you have used sip, press '%s' if you have not, or press"
-                + " any other digit to end this call.]",
+            "#tts[Again, simply press '%s' if you have used sip, press '%s' if you have not, or"
+                + " press any other digit to end this call.]",
             SIP_MENU_OPTION, NON_SIP_MENU_OPTION);
 
     MenuOption option1 =
@@ -170,17 +154,14 @@ public class ServerBusinessLogic {
 
   private SVAMLControl machineResponse() {
 
-    List<Instruction> instructions =
-        Collections.singletonList(
-            InstructionSay.builder()
-                .setText(
-                    "Hi there! We tried to reach you to speak with you about our awesome products."
-                        + " We will try again later. Bye!")
-                .build());
+    String instruction =
+        "Hi there! We tried to reach you to speak with you about our awesome products. We will try"
+            + " again later. Bye!";
 
     return SVAMLControl.builder()
         .setAction(ActionHangUp.builder().build())
-        .setInstructions(instructions)
+        .setInstructions(
+            Collections.singletonList(InstructionSay.builder().setText(instruction).build()))
         .build();
   }
 }
