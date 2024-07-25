@@ -15,7 +15,7 @@ public class ServerBusinessLogic {
   
   private final BatchesService batches; 
   
-  public ServerBusinessLogic(SinchClient sinchClient, BatchesService batchesService){
+  public ServerBusinessLogic(SinchClient sinchClient){
     this.batches = sinchClient.sms().batches();
   }
 
