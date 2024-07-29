@@ -1,12 +1,7 @@
 package com.mycompany.app.sms;
 
 import com.sinch.sdk.SinchClient;
-import com.sinch.sdk.domains.sms.BatchesService;
 import com.sinch.sdk.domains.sms.WebHooksService;
-import com.sinch.sdk.domains.sms.adapters.SMSService;
-import com.sinch.sdk.domains.sms.models.DeliveryReportBatch;
-import com.sinch.sdk.domains.sms.models.DeliveryReportRecipient;
-import com.sinch.sdk.domains.sms.models.InboundBinary;
 import com.sinch.sdk.domains.sms.models.InboundText;
 import com.sinch.sdk.domains.sms.models.webhooks.WebhooksEvent;
 import org.springframework.beans.factory.annotation.Autowired;
