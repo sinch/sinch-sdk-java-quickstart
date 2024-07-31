@@ -21,5 +21,10 @@ credentials:
   application-api-key:
   application-api-secret: 
 
+sms:
+  # Sets the region for SMS
+  # valid values are US and EU
+  region: US
+
 # Secret value set for Numbers webhooks calls validation
 numbers.webhooks.secret:

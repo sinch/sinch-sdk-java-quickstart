@@ -24,6 +24,9 @@ public class Config {
   @Value("${credentials.application-api-secret}")
   String applicationSecret;
 
+  @Value("${sms.region}")
+  String region;
+
   @Bean
   public SinchClient sinchClient() {
 
@@ -46,6 +49,9 @@ public class Config {
 
     if (!StringUtil.isEmpty(applicationSecret)) {
       builder.setApplicationSecret(applicationSecret);
+    }
+    if (!StringUtil.isEmpty(region)) {
+      builder.setSmsRegion(SMSRegion.from(region));
     }
 
     return new SinchClient(builder.build());
