@@ -3,6 +3,7 @@ package com.mycompany.app;
 import com.sinch.sdk.SinchClient;
 import com.sinch.sdk.core.utils.StringUtil;
 import com.sinch.sdk.models.Configuration;
+import com.sinch.sdk.models.SMSRegion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
@@ -18,6 +19,9 @@ public class Config {
   @Value("${credentials.key-secret}")
   String keySecret;
 
+  @Value("${sms.region}")
+  String region;
+
   @Bean
   public SinchClient sinchClient() {
 
@@ -32,6 +36,9 @@ public class Config {
     }
     if (!StringUtil.isEmpty(keySecret)) {
       builder.setKeySecret(keySecret);
+    }
+    if (!StringUtil.isEmpty(region)) {
+      builder.setSmsRegion(SMSRegion.from(region));
     }
 
     return new SinchClient(builder.build());

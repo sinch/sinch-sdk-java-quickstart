@@ -21,17 +21,18 @@ public class ServerBusinessLogic {
   private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
   public void processInboundEvent(InboundText event) {
-    trace(event);
+    
+    LOGGER.info("Handle event: " + event);
 
-    batches.send(
-        SendSmsBatchTextRequest.builder()
+    SendSmsBatchTextRequest smsRequest = SendSmsBatchTextRequest.builder()
             .setTo(Collections.singletonList(event.getFrom()))
             .setBody("You sent: " + event.getBody())
             .setFrom(event.getTo())
-            .build());
+            .build();
+
+    LOGGER.info("Replying with: " + smsRequest);
+
+    batches.send(smsRequest);
   }
 
-  private void trace(WebhooksEvent event) {
-    LOGGER.info("Handle event: " + event);
-  }
 }
