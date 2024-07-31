@@ -4,7 +4,7 @@ This directory contains a server application based onto [Sinch SDK java](https:/
 
 ## Requirements
 
-- JDK 8 or later (Sinch SDK Java is requiring java 8 only but client application can use latest available version)
+- JDK 21 or later (Sinch SDK Java is requiring java 8 only but client application can use latest available version)
 - [Maven](https://maven.apache.org/)
 - [SpringBoot](https://spring.io/projects/spring-boot)
 - [Sinch account](https://dashboard.sinch.com)
@@ -39,7 +39,7 @@ Located in `server` section:
 
    Compile and run the application as server locally.
    ```bash
-   mvn spring-boot:run
+   mvn clean spring-boot:run
    ```
 ### EndPoints
 When server is online, declared controllers will respond to following endpoints
