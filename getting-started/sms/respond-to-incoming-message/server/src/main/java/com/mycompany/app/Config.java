@@ -30,7 +30,6 @@ public class Config {
     if (!StringUtil.isEmpty(projectId)) {
       builder.setProjectId(projectId);
     }
-
     if (!StringUtil.isEmpty(keyId)) {
       builder.setKeyId(keyId);
     }

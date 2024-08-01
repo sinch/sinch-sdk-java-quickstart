@@ -4,7 +4,6 @@ import com.sinch.sdk.SinchClient;
 import com.sinch.sdk.domains.sms.BatchesService;
 import com.sinch.sdk.domains.sms.models.InboundText;
 import com.sinch.sdk.domains.sms.models.requests.SendSmsBatchTextRequest;
-import com.sinch.sdk.domains.sms.models.webhooks.WebhooksEvent;
 import java.util.Collections;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
@@ -21,10 +20,11 @@ public class ServerBusinessLogic {
   private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
   public void processInboundEvent(InboundText event) {
-    
+
     LOGGER.info("Handle event: " + event);
 
-    SendSmsBatchTextRequest smsRequest = SendSmsBatchTextRequest.builder()
+    SendSmsBatchTextRequest smsRequest =
+        SendSmsBatchTextRequest.builder()
             .setTo(Collections.singletonList(event.getFrom()))
             .setBody("You sent: " + event.getBody())
             .setFrom(event.getTo())
@@ -34,5 +34,4 @@ public class ServerBusinessLogic {
 
     batches.send(smsRequest);
   }
-
 }
