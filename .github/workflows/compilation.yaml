@@ -17,5 +17,8 @@ jobs:
           cache: maven
       - name: Building
         run: |
+          # check sources format consistency
+          mvn -f pom-ci.xml clean spotless:check
+          # compilation validation
           ./compile.sh
 
