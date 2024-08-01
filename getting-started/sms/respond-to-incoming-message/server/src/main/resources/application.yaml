@@ -11,11 +11,11 @@ credentials:
   # Unified related credentials, used by:
   # - Numbers
   # - SMS
-  project-id: 1f460ee6-c7a4-49f7-a292-a53d86906411
-  key-id: 81f73296-8319-43e0-8240-9245cea1116f
-  key-secret: 05-MHN8IqCk1mr3BucGgynBiab
+  project-id:
+  key-id:
+  key-secret:
 
 sms:
   # Sets the region for SMS
   # valid values are US and EU
-  region: US
+  region:

@@ -24,7 +24,7 @@ credentials:
 sms:
   # Sets the region for SMS
   # valid values are US and EU
-  region: US
+  region:
 
 # Secret value set for Numbers webhooks calls validation
 numbers.webhooks.secret:
