@@ -14,3 +14,8 @@ credentials:
   project-id:
   key-id:
   key-secret:
+
+sms:
+  # Sets the region for SMS
+  # valid values are US and EU
+  region:
