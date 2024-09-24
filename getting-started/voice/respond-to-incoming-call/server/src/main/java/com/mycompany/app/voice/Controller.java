@@ -2,11 +2,8 @@ package com.mycompany.app.voice;
 
 import com.sinch.sdk.SinchClient;
 import com.sinch.sdk.domains.voice.WebHooksService;
-import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.DisconnectCallEvent;
 import com.sinch.sdk.domains.voice.models.webhooks.IncomingCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.NotifyEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
 import java.util.Map;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,17 +62,8 @@ public class Controller {
     var response =
         switch (event) {
           case IncomingCallEvent e -> webhooksBusinessLogic.incoming(e);
-          case AnsweredCallEvent e -> webhooksBusinessLogic.answered(e);
           case DisconnectCallEvent e -> {
             webhooksBusinessLogic.disconnect(e);
-            yield null;
-          }
-          case PromptInputEvent e -> {
-            webhooksBusinessLogic.prompt(e);
-            yield null;
-          }
-          case NotifyEvent e -> {
-            webhooksBusinessLogic.notify(e);
             yield null;
           }
           default -> throw new IllegalStateException("Unexpected value: " + event);
