@@ -1,4 +1,5 @@
 import com.sinch.sdk.SinchClient;
+import conversation.ConversationQuickStart;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.LogManager;
@@ -18,6 +19,14 @@ public abstract class Application {
 
       SinchClient client = SinchClientHelper.initSinchClient();
       LOGGER.info("Application initiated. SinchClient ready.");
+
+      // Conversation service dedicated business logic processing
+      // (see https://developers.sinch.com/docs/conversation)
+      // comment if unused
+      if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
+        ConversationQuickStart conversation =
+            new ConversationQuickStart(client.conversation().v1());
+      }
 
       // Numbers service dedicated business logic processing
       // (see https://developers.sinch.com/categories/numbersandconnectivity)
