@@ -1,4 +1,5 @@
 import com.sinch.sdk.SinchClient;
+import conversation.ConversationQuickStart;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.LogManager;
@@ -7,7 +8,6 @@ import numbers.NumbersQuickStart;
 import sms.SmsQuickStart;
 import verification.VerificationQuickStart;
 import voice.VoiceQuickStart;
-import conversation.ConversationQuickStart;
 
 public abstract class Application {
 
@@ -24,7 +24,8 @@ public abstract class Application {
       // (see https://developers.sinch.com/docs/conversation)
       // comment if unused
       if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
-        ConversationQuickStart conversation = new ConversationQuickStart(client.conversation().v1());
+        ConversationQuickStart conversation =
+            new ConversationQuickStart(client.conversation().v1());
       }
 
       // Numbers service dedicated business logic processing

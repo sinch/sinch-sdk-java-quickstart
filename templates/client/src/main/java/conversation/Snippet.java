@@ -1,6 +1,6 @@
 package conversation;
 
-import com.sinch.sdk.domains.conversation.*;
+import com.sinch.sdk.domains.conversation.api.v1.ConversationService;
 import java.util.logging.Logger;
 
 public class Snippet {
