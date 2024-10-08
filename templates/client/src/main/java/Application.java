@@ -7,6 +7,7 @@ import numbers.NumbersQuickStart;
 import sms.SmsQuickStart;
 import verification.VerificationQuickStart;
 import voice.VoiceQuickStart;
+import conversation.ConversationQuickStart;
 
 public abstract class Application {
 
@@ -18,6 +19,13 @@ public abstract class Application {
 
       SinchClient client = SinchClientHelper.initSinchClient();
       LOGGER.info("Application initiated. SinchClient ready.");
+
+      // Conversation service dedicated business logic processing
+      // (see https://developers.sinch.com/docs/conversation)
+      // comment if unused
+      if (client.getConfiguration().getUnifiedCredentials().isPresent()) {
+        ConversationQuickStart conversation = new ConversationQuickStart(client.conversation().v1());
+      }
 
       // Numbers service dedicated business logic processing
       // (see https://developers.sinch.com/categories/numbersandconnectivity)
