@@ -55,7 +55,7 @@ public abstract class Application {
       // (see https://developers.sinch.com/docs/voice)
       // comment if unused
       if (client.getConfiguration().getApplicationCredentials().isPresent()) {
-        VoiceQuickStart voice = new VoiceQuickStart(client.voice());
+        VoiceQuickStart voice = new VoiceQuickStart(client.voice().v1());
       }
 
     } catch (Exception e) {
