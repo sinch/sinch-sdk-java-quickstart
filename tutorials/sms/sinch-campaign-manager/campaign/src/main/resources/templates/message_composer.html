@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sinch Appointment Confirmation</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <h1>Sinch SMS Marketing App</h1>
+    </div>
+    <div class="container">
+      <form action="campaign" method="POST" onsubmit="">
+        <div class="schedule_campaign">
+          <div>
+            <label for="message">Schedule Campaign</label>
+          </div>
+          <input type="date" id="campaign_date" name="campaign_date" required />
+
+          <input type="time" id="campaign_time" name="campaign_time" required />
+        </div>
+        <div class="message_compose">
+          <label for="message">Compose Message</label>
+        </div>
+        <div>
+          <textarea name="message" maxlength="160" autofocus></textarea>
+          <div id="the-count">
+            <span id="current">0</span>
+            <span id="maximum">/ 160</span>
+          </div>
+        </div>
+
+        <input type="submit" value="Schedule Campaign" />
+      </form>
+    </div>
+  </body>
+  <script src="/scripts/sms_character_counter.js"></script>
+</html>
