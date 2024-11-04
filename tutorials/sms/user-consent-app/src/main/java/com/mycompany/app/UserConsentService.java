@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AutoSubscribeService {
+public class UserConsentService {
 
-  private static final Logger LOGGER = Logger.getLogger(AutoSubscribeService.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(UserConsentService.class.getName());
 
   static final String SUBSCRIBE_ACTION = "SUBSCRIBE";
   static final String STOP_ACTION = "STOP";
@@ -23,7 +23,7 @@ public class AutoSubscribeService {
   private final Group group;
 
   @Autowired
-  public AutoSubscribeService(SMSService smsService, GroupManager groupManager) {
+  public UserConsentService(SMSService smsService, GroupManager groupManager) {
     this.smsService = smsService;
     this.group = groupManager.getGroup();
   }
@@ -39,7 +39,7 @@ public class AutoSubscribeService {
     var membersList = getMembersList(group);
     var isMemberInGroup = isMemberInGroup(membersList, from);
 
-    String response = processAction(from, to, action, membersList, isMemberInGroup);
+    String response = processAction(from, to, action, isMemberInGroup);
 
     sendResponse(to, from, response);
   }
@@ -52,12 +52,7 @@ public class AutoSubscribeService {
     return membersList.contains(member);
   }
 
-  private String processAction(
-      String from,
-      String to,
-      String action,
-      Collection<String> membersList,
-      boolean isMemberInGroup) {
+  private String processAction(String from, String to, String action, boolean isMemberInGroup) {
 
     if (SUBSCRIBE_ACTION.equals(action)) {
       return subscribe(group, isMemberInGroup, to, from);
@@ -65,7 +60,7 @@ public class AutoSubscribeService {
       return unsubscribe(group, isMemberInGroup, to, from);
     }
 
-    return unknwownAction(isMemberInGroup, to);
+    return unknownAction(isMemberInGroup, to);
   }
 
   private String subscribe(
@@ -100,7 +95,7 @@ public class AutoSubscribeService {
         .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
   }
 
-  private String unknwownAction(boolean isMemberInGroup, String to) {
+  private String unknownAction(boolean isMemberInGroup, String to) {
 
     String message =
         isMemberInGroup

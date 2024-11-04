@@ -11,10 +11,10 @@
   </parent>
 
   <groupId>my.company.com</groupId>
-  <artifactId>sinch-sdk-java-tuturial-auto-subscribe</artifactId>
+  <artifactId>sinch-sdk-java-tuturial-user-consent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Sinch Java SDK auto-subscribe Sample Application</name>
-  <description>Demo Project for auto-subscribe</description>
+  <name>Sinch Java SDK user consent Sample Application</name>
+  <description>Demo Project for user consent</description>
 
   <properties>
     <sinch.sdk.java.version>[1.0.0,)</sinch.sdk.java.version>
