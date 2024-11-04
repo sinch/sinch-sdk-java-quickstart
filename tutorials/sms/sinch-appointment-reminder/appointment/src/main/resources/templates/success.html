@@ -1,0 +1,11 @@
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <title>Sinch Appointment Confirmation</title>
+  </head>
+  <body>
+    <p th:text="${patient+', thanks for choosing to see Dr '+doctor}"></p>
+    <p
+      th:text="${'You are scheduled for '+appointmentDateTime+' and should receive a confirmation at '+ phone}"
+    ></p>
+  </body>
+</html>

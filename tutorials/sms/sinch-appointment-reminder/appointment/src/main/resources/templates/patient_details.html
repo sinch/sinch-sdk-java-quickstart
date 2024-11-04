@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sinch Appointment Confirmation</title>
+    <link type="text/css" href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--If form submission results in error, flash error message -->
+    <div class="flashes" th:if="${message}">
+      <p th:text="${message}"></p>
+      <p></p>
+    </div>
+
+    <div>
+      <h1>Sinch Hospital Appointment Confirmation</h1>
+    </div>
+    <div class="container">
+      <form action="appointment" method="post">
+        <div class="row">
+          <div class="col-25">
+            <label for="name">Patient: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="text"
+              name="patient"
+              placeholder="Patient name"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="treatment">Doctor: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="text"
+              name="doctor"
+              placeholder="Name of doctor"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="appointment-date">Appointment date: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="date"
+              id="appointment_date"
+              name="appointment_date"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="appointment_time">Appointment time: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="time"
+              id="appointment_time"
+              name="appointment_time"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="phone">Patient mobile number: </label>
+          </div>
+          <div class="col-75">
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="01234..."
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="Make Appointment" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

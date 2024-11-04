@@ -1,0 +1,15 @@
+logging:
+  level:
+    com: INFO
+
+server:
+    port: 8090
+
+sinch_details:
+  project-id:
+  key-id:
+  key-secret:
+  from_number:
+  country_code:
+  sms_region:
+
