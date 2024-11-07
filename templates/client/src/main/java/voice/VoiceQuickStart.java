@@ -1,6 +1,6 @@
 package voice;
 
-import com.sinch.sdk.domains.voice.VoiceService;
+import com.sinch.sdk.domains.voice.api.v1.VoiceService;
 
 public class VoiceQuickStart {
 

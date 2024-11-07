@@ -1,11 +1,11 @@
 package com.mycompany.app.voice;
 
-import com.sinch.sdk.domains.voice.models.svaml.SVAMLControl;
-import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.DisconnectCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.IncomingCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.NotifyEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
+import com.sinch.sdk.domains.voice.models.v1.svaml.SvamlControl;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.AnsweredCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.DisconnectedCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.IncomingCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.NotificationEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.PromptInputEvent;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
@@ -14,21 +14,21 @@ public class ServerBusinessLogic {
 
   private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
-  public SVAMLControl incoming(IncomingCallEvent event) {
+  public SvamlControl incoming(IncomingCallEvent event) {
 
     LOGGER.info("Handle event :" + event);
 
-    return SVAMLControl.builder().build();
+    return SvamlControl.builder().build();
   }
 
-  public SVAMLControl answered(AnsweredCallEvent event) {
+  public SvamlControl answered(AnsweredCallEvent event) {
 
     LOGGER.info("Handle event: " + event);
 
-    return SVAMLControl.builder().build();
+    return SvamlControl.builder().build();
   }
 
-  public void disconnect(DisconnectCallEvent event) {
+  public void disconnect(DisconnectedCallEvent event) {
 
     LOGGER.info("Handle event: " + event);
   }
@@ -38,7 +38,7 @@ public class ServerBusinessLogic {
     LOGGER.info("Handle event: " + event);
   }
 
-  public void notify(NotifyEvent event) {
+  public void notify(NotificationEvent event) {
 
     LOGGER.info("Handle event: " + event);
   }

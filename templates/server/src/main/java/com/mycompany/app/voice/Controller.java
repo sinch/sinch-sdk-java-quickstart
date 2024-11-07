@@ -1,12 +1,12 @@
 package com.mycompany.app.voice;
 
 import com.sinch.sdk.SinchClient;
-import com.sinch.sdk.domains.voice.WebHooksService;
-import com.sinch.sdk.domains.voice.models.webhooks.AnsweredCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.DisconnectCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.IncomingCallEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.NotifyEvent;
-import com.sinch.sdk.domains.voice.models.webhooks.PromptInputEvent;
+import com.sinch.sdk.domains.voice.api.v1.WebHooksService;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.AnsweredCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.DisconnectedCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.IncomingCallEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.NotificationEvent;
+import com.sinch.sdk.domains.voice.models.v1.webhooks.PromptInputEvent;
 import java.util.Map;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +39,11 @@ public class Controller {
   public ResponseEntity<String> VoiceEvent(
       @RequestHeader Map<String, String> headers, @RequestBody String body) {
 
-    WebHooksService webhooks = sinchClient.voice().webhooks();
+    WebHooksService webhooks = sinchClient.voice().v1().webhooks();
 
     // ensure valid authentication to handle request
     var validAuth =
-        webhooks.validateAuthenticatedRequest(
+        webhooks.validateAuthenticationHeader(
             // The HTTP verb this controller is managing
             "POST",
             // The URI this controller is managing
@@ -59,14 +59,14 @@ public class Controller {
     }
 
     // decode the payload request
-    var event = webhooks.unserializeWebhooksEvent(body);
+    var event = webhooks.parseEvent(body);
 
     // let business layer process the request
     var response =
         switch (event) {
           case IncomingCallEvent e -> webhooksBusinessLogic.incoming(e);
           case AnsweredCallEvent e -> webhooksBusinessLogic.answered(e);
-          case DisconnectCallEvent e -> {
+          case DisconnectedCallEvent e -> {
             webhooksBusinessLogic.disconnect(e);
             yield null;
           }
@@ -74,7 +74,7 @@ public class Controller {
             webhooksBusinessLogic.prompt(e);
             yield null;
           }
-          case NotifyEvent e -> {
+          case NotificationEvent e -> {
             webhooksBusinessLogic.notify(e);
             yield null;
           }
@@ -83,7 +83,7 @@ public class Controller {
 
     String serializedResponse = "";
     if (null != response) {
-      serializedResponse = webhooks.serializeWebhooksResponse(response);
+      serializedResponse = webhooks.serializeResponse(response);
     }
 
     LOGGER.finest("JSON response: " + serializedResponse);
