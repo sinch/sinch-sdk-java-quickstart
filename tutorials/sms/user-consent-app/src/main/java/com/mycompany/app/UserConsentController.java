@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AutoSubscribeController {
+public class UserConsentController {
 
   private final SMSService smsService;
-  private final AutoSubscribeService service;
+  private final UserConsentService service;
 
   @Autowired
-  public AutoSubscribeController(SMSService smsService, AutoSubscribeService service) {
+  public UserConsentController(SMSService smsService, UserConsentService service) {
     this.smsService = smsService;
     this.service = service;
   }
@@ -30,8 +30,6 @@ public class AutoSubscribeController {
     // let business layer process the request
     if (Objects.requireNonNull(event) instanceof InboundText e) {
       service.processInboundEvent(e);
-    } else {
-      throw new IllegalStateException("Unexpected value: " + event);
     }
   }
 }

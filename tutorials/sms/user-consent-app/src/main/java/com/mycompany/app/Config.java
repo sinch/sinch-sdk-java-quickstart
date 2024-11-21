@@ -19,17 +19,18 @@ public class Config {
   @Value("${credentials.key-secret}")
   String keySecret;
 
+  @Value("${sms.region}")
+  String smsRegion;
+
   @Bean
   public SMSService smsService() {
 
-    var configuration =
-        Configuration.builder()
-            .setProjectId(projectId)
-            .setKeyId(keyId)
-            .setKeySecret(keySecret)
-            .setSmsRegion(SMSRegion.US)
-            .build();
+    var builder =
+        Configuration.builder().setProjectId(projectId).setKeyId(keyId).setKeySecret(keySecret);
 
-    return new SinchClient(configuration).sms();
+    if (!smsRegion.isEmpty()) {
+      builder.setSmsRegion(SMSRegion.from(smsRegion));
+    }
+    return new SinchClient(builder.build()).sms();
   }
 }
