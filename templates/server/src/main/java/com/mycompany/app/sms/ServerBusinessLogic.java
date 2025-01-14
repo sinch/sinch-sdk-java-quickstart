@@ -1,10 +1,8 @@
 package com.mycompany.app.sms;
 
-import com.sinch.sdk.domains.sms.models.DeliveryReportBatch;
-import com.sinch.sdk.domains.sms.models.DeliveryReportRecipient;
-import com.sinch.sdk.domains.sms.models.InboundBinary;
-import com.sinch.sdk.domains.sms.models.InboundText;
-import com.sinch.sdk.domains.sms.models.webhooks.WebhooksEvent;
+import com.sinch.sdk.domains.sms.models.v1.deliveryreports.DeliveryReport;
+import com.sinch.sdk.domains.sms.models.v1.inbounds.InboundMessage;
+import com.sinch.sdk.domains.sms.models.v1.webhooks.SmsEvent;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
@@ -13,23 +11,15 @@ public class ServerBusinessLogic {
 
   private static final Logger LOGGER = Logger.getLogger(ServerBusinessLogic.class.getName());
 
-  public void processInboundEvent(InboundText event) {
+  public void processInboundEvent(InboundMessage event) {
     trace(event);
   }
 
-  public void processInboundEvent(InboundBinary event) {
+  public void processDeliveryReportEvent(DeliveryReport event) {
     trace(event);
   }
 
-  public void processDeliveryReportEvent(DeliveryReportRecipient event) {
-    trace(event);
-  }
-
-  public void processDeliveryReportEvent(DeliveryReportBatch event) {
-    trace(event);
-  }
-
-  private void trace(WebhooksEvent event) {
+  private void trace(SmsEvent event) {
     LOGGER.info("Handle event: " + event);
   }
 }
