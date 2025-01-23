@@ -1,9 +1,9 @@
 package com.mycompany.app;
 
-import com.sinch.sdk.domains.sms.GroupsService;
-import com.sinch.sdk.domains.sms.SMSService;
-import com.sinch.sdk.domains.sms.models.Group;
-import com.sinch.sdk.domains.sms.models.requests.GroupCreateRequestParameters;
+import com.sinch.sdk.domains.sms.api.v1.GroupsService;
+import com.sinch.sdk.domains.sms.api.v1.SMSService;
+import com.sinch.sdk.domains.sms.models.v1.groups.Group;
+import com.sinch.sdk.domains.sms.models.v1.groups.request.GroupRequest;
 import jakarta.annotation.PreDestroy;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -66,7 +66,7 @@ public class GroupManager {
    */
   private Group createGroup(GroupsService groupsService) {
 
-    var request = GroupCreateRequestParameters.builder().setName(GROUP_NAME).build();
+    var request = GroupRequest.builder().setName(GROUP_NAME).build();
 
     var group = groupsService.create(request);
 

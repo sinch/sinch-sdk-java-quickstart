@@ -1,7 +1,7 @@
 package com.mycompany.app;
 
 import com.sinch.sdk.SinchClient;
-import com.sinch.sdk.domains.sms.SMSService;
+import com.sinch.sdk.domains.sms.api.v1.SMSService;
 import com.sinch.sdk.models.Configuration;
 import com.sinch.sdk.models.SMSRegion;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +30,6 @@ public class Config {
             .setSmsRegion(SMSRegion.US)
             .build();
 
-    return new SinchClient(configuration).sms();
+    return new SinchClient(configuration).sms().v1();
   }
 }
