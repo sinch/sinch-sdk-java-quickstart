@@ -1,6 +1,6 @@
-# auto-subscribe application sample
+# user-consent application sample
 
-This directory contains sample related to Java SDK tutorials: [auto-subscribe](https://developers.sinch.com/docs/sms/tutorials/sms/tutorials/java-sdk/auto-subscribe)
+This directory contains sample related to Java SDK tutorials: [user-consent](https://developers.sinch.com/docs/sms/tutorials/sms/tutorials/java-sdk/user-consent)
 
 ## Requirements
 
