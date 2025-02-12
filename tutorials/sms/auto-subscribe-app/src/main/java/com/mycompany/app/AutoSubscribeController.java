@@ -1,7 +1,7 @@
 package com.mycompany.app;
 
-import com.sinch.sdk.domains.sms.SMSService;
-import com.sinch.sdk.domains.sms.models.InboundText;
+import com.sinch.sdk.domains.sms.api.v1.SMSService;
+import com.sinch.sdk.domains.sms.models.v1.inbounds.TextMessage;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,10 +25,10 @@ public class AutoSubscribeController {
   public void smsDeliveryEvent(@RequestBody String body) {
 
     // decode the request payload
-    var event = smsService.webHooks().parse(body);
+    var event = smsService.webhooks().parseEvent(body);
 
     // let business layer process the request
-    if (Objects.requireNonNull(event) instanceof InboundText e) {
+    if (Objects.requireNonNull(event) instanceof TextMessage e) {
       service.processInboundEvent(e);
     } else {
       throw new IllegalStateException("Unexpected value: " + event);

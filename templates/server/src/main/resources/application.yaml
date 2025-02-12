@@ -31,3 +31,7 @@ numbers.webhooks.secret:
 
 # Secret value set for Conversation webhooks calls validation
 conversation.webhooks.secret:
+
+# Secret value set for Conversation webhooks calls validation
+sms.webhooks.secret:
+  

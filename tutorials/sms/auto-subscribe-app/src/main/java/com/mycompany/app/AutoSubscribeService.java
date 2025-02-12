@@ -1,10 +1,10 @@
 package com.mycompany.app;
 
-import com.sinch.sdk.domains.sms.SMSService;
-import com.sinch.sdk.domains.sms.models.Group;
-import com.sinch.sdk.domains.sms.models.InboundText;
-import com.sinch.sdk.domains.sms.models.requests.GroupUpdateRequestParameters;
-import com.sinch.sdk.domains.sms.models.requests.SendSmsBatchTextRequest;
+import com.sinch.sdk.domains.sms.api.v1.SMSService;
+import com.sinch.sdk.domains.sms.models.v1.batches.request.TextRequest;
+import com.sinch.sdk.domains.sms.models.v1.groups.Group;
+import com.sinch.sdk.domains.sms.models.v1.groups.request.GroupUpdateRequest;
+import com.sinch.sdk.domains.sms.models.v1.inbounds.TextMessage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public class AutoSubscribeService {
     this.group = groupManager.getGroup();
   }
 
-  public void processInboundEvent(InboundText event) {
+  public void processInboundEvent(TextMessage event) {
 
     LOGGER.info("Received event:" + event);
 
@@ -65,7 +65,7 @@ public class AutoSubscribeService {
       return unsubscribe(group, isMemberInGroup, to, from);
     }
 
-    return unknwownAction(isMemberInGroup, to);
+    return unknownAction(isMemberInGroup, to);
   }
 
   private String subscribe(
@@ -76,8 +76,7 @@ public class AutoSubscribeService {
           .formatted(group.getName(), STOP_ACTION, groupPhoneNumber);
     }
 
-    var request =
-        GroupUpdateRequestParameters.builder().setAdd(Collections.singletonList(member)).build();
+    var request = GroupUpdateRequest.builder().setAdd(Collections.singletonList(member)).build();
 
     smsService.groups().update(group.getId(), request);
     return "Congratulations! You are now subscribed to '%s'. Text \"%s\" to +%s to leave this group."
@@ -92,15 +91,14 @@ public class AutoSubscribeService {
           .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
     }
 
-    var request =
-        GroupUpdateRequestParameters.builder().setRemove(Collections.singletonList(member)).build();
+    var request = GroupUpdateRequest.builder().setRemove(Collections.singletonList(member)).build();
 
     smsService.groups().update(group.getId(), request);
     return "We're sorry to see you go. You can always rejoin '%s' by texting \"%s\" to +%s."
         .formatted(group.getName(), SUBSCRIBE_ACTION, groupPhoneNumber);
   }
 
-  private String unknwownAction(boolean isMemberInGroup, String to) {
+  private String unknownAction(boolean isMemberInGroup, String to) {
 
     String message =
         isMemberInGroup
@@ -116,7 +114,7 @@ public class AutoSubscribeService {
   private void sendResponse(String from, String to, String response) {
 
     var request =
-        SendSmsBatchTextRequest.builder()
+        TextRequest.builder()
             .setTo(Collections.singletonList(to))
             .setBody(response)
             .setFrom(from)

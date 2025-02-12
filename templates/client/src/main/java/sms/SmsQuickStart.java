@@ -1,6 +1,6 @@
 package sms;
 
-import com.sinch.sdk.domains.sms.*;
+import com.sinch.sdk.domains.sms.api.v1.SMSService;
 
 public class SmsQuickStart {
 

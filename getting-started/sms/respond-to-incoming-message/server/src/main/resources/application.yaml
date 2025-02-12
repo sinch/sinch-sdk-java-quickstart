@@ -19,3 +19,6 @@ sms:
   # Sets the region for SMS
   # valid values are US and EU
   region:
+
+sms.webhooks.secret:
+  

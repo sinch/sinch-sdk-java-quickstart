@@ -40,7 +40,7 @@ public abstract class Application {
       // comment if unused
       if (client.getConfiguration().getSmsServicePlanCredentials().isPresent()
           || client.getConfiguration().getUnifiedCredentials().isPresent()) {
-        SmsQuickStart sms = new SmsQuickStart(client.sms());
+        SmsQuickStart sms = new SmsQuickStart(client.sms().v1());
       }
 
       // Verification service dedicated business logic processing
