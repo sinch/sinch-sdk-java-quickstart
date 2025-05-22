@@ -1,6 +1,7 @@
 #!/bin/sh
 
 DIRECTORIES="
+conversation/send-text-message/client
 sms/send-sms-message/client
 sms/respond-to-incoming-message/server
 verification/user-verification-using-sms-pin/client
