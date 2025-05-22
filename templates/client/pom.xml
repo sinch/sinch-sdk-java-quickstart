@@ -74,11 +74,9 @@
       <version>${sinch.sdk.java.version}</version>
     </dependency>
 
-    <!-- We don't care about logs from 3rd party dependencies for sample app:
-         then we remove the warning about missing SLF4J logger -->
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-nop</artifactId>
+      <artifactId>slf4j-jdk14</artifactId>
       <version>2.0.9</version>
     </dependency>
 
