@@ -8,9 +8,8 @@ server:
   port: 8090
 
 credentials:
-  # Unified related credentials, used by:
-  # - Numbers
-  # - SMS
+  # Required credentials for using the SMS API
+  # US/EU are the only supported regions with unified credentials
   project-id:
   key-id:
   key-secret:

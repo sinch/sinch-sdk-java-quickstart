@@ -8,9 +8,10 @@ server:
   port: 8090
 
 credentials:
-  # Unified related credentials, used by:
+  # Java SDK domains supporting unified credentials
   # - Numbers
-  # - SMS
+  # - SMS: US/EU are the only supported regions with unified credentials
+  # - Conversation
   project-id:
   key-id:
   key-secret:
