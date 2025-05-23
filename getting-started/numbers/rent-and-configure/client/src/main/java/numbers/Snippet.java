@@ -20,7 +20,11 @@ public class Snippet {
     SmsConfiguration smsConfiguration =
         SmsConfiguration.builder().setServicePlanId(servicePlanId).build();
 
-    LOGGER.info(String.format("Sending request to rent number: '%s'", phoneNumber));
+    LOGGER.info(
+        String.format(
+            "Sending request to rent the virtual number: '%s' and configure it with the"
+                + " pre-configured service plan id '%s' to use the SMS capability",
+            phoneNumber, servicePlanId));
 
     AvailableNumberRentRequest rentRequest =
         AvailableNumberRentRequest.builder().setSmsConfiguration(smsConfiguration).build();
