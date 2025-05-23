@@ -8,8 +8,6 @@ server:
   port: 8090
 
 credentials:
-  # Application related credentials, used by:
-  # - Verification
-  # - Voice
+  # Required credentials for using the Voice API
   application-api-key:
   application-api-secret:
