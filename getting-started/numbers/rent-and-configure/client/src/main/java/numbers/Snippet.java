@@ -13,7 +13,7 @@ public class Snippet {
   static void execute(NumbersService numbersService) {
 
     // Available numbers list can be retrieved by using list() function from available service, see:
-    // https://developers.sinch.com/quickstart-getting-started-poc/docs/numbers/getting-started/java-sdk/searchavailable
+    // https://developers.sinch.com/docs/numbers/getting-started/java-sdk/searchavailable
     String phoneNumber = "available_phone_number_to_be_rented";
     String servicePlanId = "YOUR_service_plan_id";
 
