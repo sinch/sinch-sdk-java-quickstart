@@ -19,7 +19,8 @@ public class Snippet {
     String recipient = "YOUR_recipient_phone_number";
     String body = "This is a test SMS message using the Sinch Java SDK.";
 
-    LOGGER.info("Sending SMS Text");
+    LOGGER.info(String.format("Submitting batch to send SMS to '%s'", recipient));
+
     BatchResponse value =
         batchesService.send(
             TextRequest.builder()
